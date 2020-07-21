@@ -34,18 +34,16 @@ def init():
     
     nb = MultinomialNB()
     nb.fit(x_train,y_train)
-    return nb, vecf
-
-
-def predict_gender(t):
-    print('line 40' + t)
-    nb, vecf = init()
 
     character = pd.read_csv('data/fixed_characters.csv')
     sw = stopwords.words('english')
     names = character.name.str.lower().to_list()
     sw.extend(names)
-    print(t)
+
+    return nb, vecf, sw
+
+
+def predict_gender(t, nb, vecf, sw):
     tknzr = TweetTokenizer()
     text_tokens = tknzr.tokenize(t)
     text_tokens = [split(x) for x in text_tokens]

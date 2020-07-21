@@ -6,10 +6,11 @@ app = Flask(__name__)
 def login():
     message = ''
     text = ''
+    nb, vecf, sw = predict_gender.init()
     if request.method == 'POST':
         text = request.form.get('gendered')
         print('line 9') 
-        gender = predict_gender.predict_gender(text)
+        gender = predict_gender.predict_gender(text, nb, vecf, sw)
         if gender == 'Female':
             message = "Girl"
         else:
